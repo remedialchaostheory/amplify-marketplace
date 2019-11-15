@@ -1,6 +1,10 @@
 import React from "react";
 import { Auth, Hub } from 'aws-amplify';
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import ProfilePage from "./ProfilePage";
+import MarketPage from "./MarketPage";
 import "./App.css";
 
 class App extends React.Component {
@@ -42,7 +46,19 @@ class App extends React.Component {
 
     return !user ? (
         <Authenticator theme={theme} />
-    ) : <div>App</div>;
+    ) : (
+        <Router>
+          <React.Fragment>
+            <div className="app-container">
+              <Route exact path="/" component={HomePage} />
+              <Route path="/profile" component={ProfilePage} />
+              <Route path="/markets/:marketId" component={(
+                  { match }) => <MarketPage marketId={match.params.marketId}/>}
+              />
+            </div>
+          </React.Fragment>
+        </Router>
+    )
   }
 }
 
