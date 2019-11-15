@@ -2,9 +2,9 @@ import React from "react";
 import { Auth, Hub } from 'aws-amplify';
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomePage from "./HomePage";
-import ProfilePage from "./ProfilePage";
-import MarketPage from "./MarketPage";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import MarketPage from "./pages/MarketPage";
 import "./App.css";
 
 class App extends React.Component {
@@ -49,6 +49,9 @@ class App extends React.Component {
     ) : (
         <Router>
           <React.Fragment>
+            {/* Navbar */}
+
+            {/* Routes*/}
             <div className="app-container">
               <Route exact path="/" component={HomePage} />
               <Route path="/profile" component={ProfilePage} />
