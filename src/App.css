@@ -1,0 +1,293 @@
+html,
+body {
+  margin: 0;
+  background-color: #f4f8fb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.app-container {
+  padding: 1em 5em 2em 5em;
+}
+
+@media (max-width: 550px) {
+  .app-container {
+    padding: 1em 3em;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-container {
+    padding: 1em 0.5em;
+  }
+}
+
+.card-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  max-width: 300px;
+  margin: 0.3em;
+}
+
+.card-body {
+  padding: 0.5em 1em;
+}
+
+.flex {
+  display: flex;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: 7px !important;
+}
+
+.mx-1 {
+  margin: 0 0.5em;
+}
+
+.my-2 {
+  margin: 1em 0;
+}
+
+.ml-2 {
+  margin-left: 1em;
+}
+
+.mb-1 {
+  margin-bottom: 7px;
+}
+
+.mb-mr {
+  margin: 0 5px 5px 0;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.pt-2 {
+  padding-top: 1em;
+}
+
+.app-title {
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #f90;
+  margin: -3px;
+}
+
+.app-icon {
+  height: 30px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.app-user {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.text-center {
+  text-align: center;
+  margin: 0;
+}
+
+.text-right {
+  text-align: right;
+  margin: 0;
+}
+
+.text-green {
+  color: green;
+}
+
+.message {
+  z-index: 2000 !important;
+}
+
+.error {
+  color: red;
+}
+
+.progress {
+  margin: 1em;
+}
+
+.dialog {
+  max-width: 500px;
+}
+
+/* center items in navbar if screen width < 520px */
+@media (max-width: 520px) {
+  .nav-container {
+    justify-content: center;
+  }
+}
+
+/* push items in navbar to opposite ends if screen width > 520px */
+@media (min-width: 520px) {
+  .nav-container {
+    justify-content: space-between;
+  }
+}
+
+/* remove the navbar item that contains the Greetings text if width > 672px */
+@media (max-width: 690px) {
+  .nav-items .el-menu-item:nth-child(1) {
+    display: none !important;
+  }
+}
+
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.profile-tabs > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-profile > * {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 5px;
+  color: var(--lightSquidInk);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.header {
+  color: var(--color-purple);
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.market-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.market-title {
+  font-weight: 300;
+  border-radius: 10px;
+  text-decoration: #f90 solid underline;
+  text-underline-position: under;
+  text-decoration-style: wavy;
+  font-size: 2.5rem;
+  display: flex;
+  color: var(--lightSquidInk);
+  align-items: center;
+}
+
+.market-title-button {
+  padding-left: 0.5em !important;
+  color: #f90 !important;
+  font-size: 30px !important;
+}
+
+@media (min-width: 640px) {
+  .market-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .market-title {
+    font-size: 2.1rem;
+  }
+  .market-title-button {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .market-title {
+    font-size: 1.8rem;
+  }
+  .market-title-button {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .market-title {
+    font-size: 1.6rem;
+  }
+  .market-title-button {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .market-title {
+    font-size: 1.5rem;
+  }
+  .market-title-button {
+    font-size: 15px !important;
+  }
+}
+
+.image-preview {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.large-icon {
+  height: 30px;
+  margin-right: 2px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-flow: row dense;
+  justify-items: center;
+  grid-gap: 0.2em;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 470px) {
+  .hide-xs {
+    display: none;
+  }
+}
