@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import MarketPage from "./pages/MarketPage";
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 class App extends React.Component {
@@ -50,8 +51,9 @@ class App extends React.Component {
         <Router>
           <React.Fragment>
             {/* Navbar */}
+            <Navbar user={user}/>
 
-            {/* Routes*/}
+            {/* Routes */}
             <div className="app-container">
               <Route exact path="/" component={HomePage} />
               <Route path="/profile" component={ProfilePage} />
