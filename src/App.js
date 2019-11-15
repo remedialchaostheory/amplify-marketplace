@@ -23,7 +23,6 @@ class App extends React.Component {
     user ? this.setState({ user }) : this.setState({ user: null });
   };
 
-
   onHubCapsule = capsule => {
     switch (capsule.payload.event) {
       case "signIn":
@@ -42,6 +41,14 @@ class App extends React.Component {
     }
   };
 
+  handleSignOut = async () => {
+    try {
+      await Auth.signOut();
+    } catch (err) {
+      console.error('Error signing out', err);
+    }
+  };
+
   render() {
     const { user } = this.state;
 
@@ -51,7 +58,7 @@ class App extends React.Component {
         <Router>
           <React.Fragment>
             {/* Navbar */}
-            <Navbar user={user}/>
+            <Navbar user={user} handleSignOut={this.handleSignOut}/>
 
             {/* Routes */}
             <div className="app-container">
