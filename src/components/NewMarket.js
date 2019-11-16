@@ -11,7 +11,24 @@ class NewMarket extends React.Component {
   };
 
   handleAddMarket = async () => {
+    try {
+      console.log(this.state.name);
+      this.setState({addMarketDialog: false});
+      const input = {
+        name: this.state.name
+      };
+      const resp = await API.graphql(graphqlOperation(createMarket, {input}));
+      console.info(`Created market: id ${resp.data.createMarket.id}`);
+      this.setState({ name: "" });
+    } catch (err) {
+      Notification.error({
+        title: "Error",
+        message: `${err.message || "Error adding market"}`
+      });
+    }
+
   };
+
   render() {
     return (
         <React.Fragment>
@@ -42,6 +59,7 @@ class NewMarket extends React.Component {
                       placeholder="Market Name"
                       trim={true}
                       onChange={name => this.setState({ name })}
+                      value={this.state.name}
                   />
                 </Form.Item>
               </Form>
