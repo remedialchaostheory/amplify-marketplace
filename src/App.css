@@ -200,7 +200,7 @@ body {
   border-radius: 10px;
   text-decoration: #f90 solid underline;
   text-underline-position: under;
-  text-decoration-style: wavy;
+  text-decoration-style: dashed;
   font-size: 2.5rem;
   display: flex;
   color: var(--lightSquidInk);
