@@ -1,5 +1,5 @@
 import React from "react";
-import { Auth, Hub } from 'aws-amplify';
+import { Auth, Hub } from "aws-amplify";
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -17,7 +17,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getUserData();
-    Hub.listen('auth', this, 'onHubCapsule');
+    Hub.listen("auth", this, "onHubCapsule");
   }
 
   getUserData = async () => {
@@ -28,15 +28,15 @@ class App extends React.Component {
   onHubCapsule = capsule => {
     switch (capsule.payload.event) {
       case "signIn":
-        console.log('signed in');
+        console.log("signed in");
         this.getUserData();
         break;
       case "signUp":
-        console.log('signed up');
+        console.log("signed up");
         break;
       case "signOut":
-        console.log('signed out');
-        this.setState({ user: null })
+        console.log("signed out");
+        this.setState({ user: null });
         break;
       default:
         return;
@@ -47,7 +47,7 @@ class App extends React.Component {
     try {
       await Auth.signOut();
     } catch (err) {
-      console.error('Error signing out', err);
+      console.error("Error signing out", err);
     }
   };
 
@@ -55,26 +55,29 @@ class App extends React.Component {
     const { user } = this.state;
 
     return !user ? (
-        <Authenticator theme={theme} />
+      <Authenticator theme={theme} />
     ) : (
-        <UserContext.Provider value={{ user }}>
+      <UserContext.Provider value={{ user }}>
         <Router>
           <React.Fragment>
             {/* Navbar */}
-            <Navbar user={user} handleSignOut={this.handleSignOut}/>
+            <Navbar user={user} handleSignOut={this.handleSignOut} />
 
             {/* Routes */}
             <div className="app-container">
               <Route exact path="/" component={HomePage} />
               <Route path="/profile" component={ProfilePage} />
-              <Route path="/markets/:marketId" component={(
-                  { match }) => <MarketPage marketId={match.params.marketId}/>}
+              <Route
+                path="/markets/:marketId"
+                component={({ match }) => (
+                  <MarketPage user={user} marketId={match.params.marketId} />
+                )}
               />
             </div>
           </React.Fragment>
         </Router>
-        </UserContext.Provider>
-    )
+      </UserContext.Provider>
+    );
   }
 }
 
