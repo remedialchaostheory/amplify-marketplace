@@ -1,6 +1,6 @@
 import React from "react";
 import { Storage, Auth, API, graphqlOperation } from "aws-amplify";
-import { createProduct from "../graphql/mutations";
+import { createProduct } from "../graphql/mutations";
 import { PhotoPicker } from "aws-amplify-react";
 import aws_exports from "../aws-exports";
 // prettier-ignore
@@ -58,7 +58,14 @@ class NewProduct extends React.Component {
   };
 
   render() {
-    const { description, price, image, shipped, imagePreview } = this.state;
+    const {
+      description,
+      price,
+      image,
+      shipped,
+      imagePreview,
+      isUploading,
+    } = this.state;
 
     return (
       <div className="flex-center">
@@ -140,11 +147,12 @@ class NewProduct extends React.Component {
             />
             <Form.Item>
               <Button
-                disabled={!image || !description || !price}
+                disabled={!image || !description || !price || isUploading}
                 type="primary"
                 onClick={this.handleAddProduct}
+                loading={isUploading}
               >
-                Add Product
+                {isUploading ? "Uploading..." : "Add Product"}
               </Button>
             </Form.Item>
           </Form>
