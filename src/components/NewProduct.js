@@ -128,6 +128,7 @@ class NewProduct extends React.Component {
               <Progress
                 type="circle"
                 className="progress"
+                status="success"
                 percentage={percentUploaded}
               />
             )}
