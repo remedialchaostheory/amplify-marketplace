@@ -1,7 +1,11 @@
 import React from "react";
+import { Storage, Auth, API, graphqlOperation } from "aws-amplify";
+import { createProduct from "../graphql/mutations";
 import { PhotoPicker } from "aws-amplify-react";
+import aws_exports from "../aws-exports";
 // prettier-ignore
 import { Form, Button, Input, Notification, Radio, Progress } from "element-react";
+import { convertDollarsToCents } from "../utils/index";
 
 const initialState = {
   description: "",
@@ -9,13 +13,48 @@ const initialState = {
   imagePreview: "",
   image: "",
   shipped: false,
+  isUploading: false,
 };
 class NewProduct extends React.Component {
   state = { ...initialState };
 
-  handleAddProduct = () => {
-    console.log("this.state ->", this.state);
-    this.setState({ ...initialState });
+  handleAddProduct = async () => {
+    try {
+      console.log("this.state ->", this.state);
+      this.setState({ isUploading: true });
+      const visibility = "public";
+      const { identityId } = await Auth.currentCredentials();
+      const filename = `/${visibility}/${identityId}/${Date.now()}-${
+        this.state.image.name
+      }}`;
+      const uploadedFile = await Storage.put(filename, this.state.image.file, {
+        contentType: this.state.image.type,
+      });
+      const file = {
+        key: uploadedFile.key,
+        bucket: aws_exports.aws_user_files_s3_bucket,
+        region: aws_exports.aws_project_region,
+      };
+      const input = {
+        productMarketId: this.props.marketId,
+        description: this.state.description,
+        shipped: this.state.shipped,
+        price: convertDollarsToCents(this.state.price),
+        file,
+      };
+      const resp = await API.graphql(
+        graphqlOperation(createProduct, { input }),
+      );
+      console.log("created prod ->", resp);
+      Notification({
+        title: "Success",
+        message: "Product successfully created",
+        type: "success",
+      });
+      this.setState({ ...initialState });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   render() {
