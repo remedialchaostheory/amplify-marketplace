@@ -1,5 +1,7 @@
 import React from "react";
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from "aws-amplify";
+// prettier-ignore
+import { onCreateProduct, onUpdateProduct, onDeleteProduct } from '../graphql/subscriptions'
 import { searchMarkets } from "../graphql/queries";
 import NewMarket from "../components/NewMarket";
 import MarketList from "../components/MarketList";
@@ -13,26 +15,29 @@ class HomePage extends React.Component {
 
   handleSearchChange = searchTerm => this.setState({ searchTerm });
 
-  handleClearSearch = () => this.setState( { searchTerm: "", searchResults: [] });
+  handleClearSearch = () =>
+    this.setState({ searchTerm: "", searchResults: [] });
 
   handleSearch = async event => {
     try {
       event.preventDefault();
       this.setState({ isSearching: true });
-      const resp = await API.graphql(graphqlOperation(searchMarkets, {
-        filter: {
-          or: [
-            { name: { matchPhrasePrefix: this.state.searchTerm } },
-            { owner: { matchPhrasePrefix: this.state.searchTerm } },
-            { tags: { matchPhrasePrefix: this.state.searchTerm } },
-          ]
-        },
-        // sort: {
-        //   field: "createdAt",
-        //   direction: "desc",
-        // }
-      }));
-      console.log('resp ->', resp);
+      const resp = await API.graphql(
+        graphqlOperation(searchMarkets, {
+          filter: {
+            or: [
+              { name: { matchPhrasePrefix: this.state.searchTerm } },
+              { owner: { matchPhrasePrefix: this.state.searchTerm } },
+              { tags: { matchPhrasePrefix: this.state.searchTerm } },
+            ],
+          },
+          // sort: {
+          //   field: "createdAt",
+          //   direction: "desc",
+          // }
+        }),
+      );
+      console.log("resp ->", resp);
       this.setState({
         searchResults: resp.data.searchMarkets.items,
         isSearching: false,
@@ -43,17 +48,17 @@ class HomePage extends React.Component {
   };
   render() {
     return (
-        <React.Fragment>
-          <NewMarket
-              searchTerm={this.state.searchTerm}
-              isSearching={this.state.isSearching}
-              handleSearchChange={this.handleSearchChange}
-              handleClearSearch={this.handleClearSearch}
-              handleSearch={this.handleSearch}
-          />
-          <MarketList searchResults={this.state.searchResults}/>
-        </React.Fragment>
-    )
+      <>
+        <NewMarket
+          searchTerm={this.state.searchTerm}
+          isSearching={this.state.isSearching}
+          handleSearchChange={this.handleSearchChange}
+          handleClearSearch={this.handleClearSearch}
+          handleSearch={this.handleSearch}
+        />
+        <MarketList searchResults={this.state.searchResults} />
+      </>
+    );
   }
 }
 
