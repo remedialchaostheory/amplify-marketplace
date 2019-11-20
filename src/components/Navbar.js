@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = ({ user, handleSignOut }) => (
   <Nav mode="horizontal" theme="dark" defaultActive="1">
     <div className="nav-container">
-      {/*Title*/}
+      {/* Title */}
       <Nav.Item index="1">
         <NavLink to="/" className="nav-link">
           <span className="app-title">
