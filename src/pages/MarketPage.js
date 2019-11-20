@@ -88,6 +88,20 @@ class MarketPage extends React.Component {
         this.setState({ market });
       },
     });
+
+    this.deleteProductListener = API.graphql(
+      graphqlOperation(onDeleteProduct, { owner: userId }),
+    ).subscribe({
+      next: productData => {
+        const deletedProduct = productData.value.data.onDeleteProduct;
+        const updatedProducts = this.state.market.products.items.filter(
+          item => item.id !== deletedProduct.id,
+        );
+        const market = { ...this.state.market };
+        market.products.items = updatedProducts;
+        this.setState({ market });
+      },
+    });
   };
 
   handleGetMarket = async () => {
