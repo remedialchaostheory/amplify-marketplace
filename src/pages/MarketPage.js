@@ -69,6 +69,25 @@ class MarketPage extends React.Component {
         this.setState({ market });
       },
     });
+
+    this.updateProductListener = API.graphql(
+      graphqlOperation(onUpdateProduct, { owner: userId }),
+    ).subscribe({
+      next: productData => {
+        const updatedProduct = productData.value.data.onUpdateProduct;
+        const updatedProductIndex = this.state.market.products.items.findIndex(
+          item => item.id === updatedProduct.id,
+        );
+        const updatedProducts = [
+          ...this.state.market.products.items.slice(0, updatedProductIndex),
+          updatedProduct,
+          ...this.state.market.products.items.slice(updatedProductIndex + 1),
+        ];
+        const market = { ...this.state.market };
+        market.products.items = updatedProducts;
+        this.setState({ market });
+      },
+    });
   };
 
   handleGetMarket = async () => {
