@@ -1,7 +1,5 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
-// prettier-ignore
-import { onCreateProduct, onUpdateProduct, onDeleteProduct } from '../graphql/subscriptions'
 import { searchMarkets } from "../graphql/queries";
 import NewMarket from "../components/NewMarket";
 import MarketList from "../components/MarketList";
