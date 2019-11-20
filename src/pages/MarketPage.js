@@ -1,5 +1,7 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
+// prettier-ignore
+import { onCreateProduct, onUpdateProduct, onDeleteProduct } from "../graphql/subscriptions";
 import { input } from "@aws-amplify/ui";
 import { Loading, Tabs, Icon } from "element-react";
 import { Link } from "react-router-dom";
@@ -40,7 +42,34 @@ class MarketPage extends React.Component {
 
   componentDidMount() {
     this.handleGetMarket();
+    this.createSubscriptions();
   }
+
+  componentWillUnmount() {
+    this.createProductListener.unsubscribe();
+    this.updateProductListener.unsubscribe();
+    this.deleteProductListener.unsubscribe();
+  }
+
+  createSubscriptions = () => {
+    const { user } = this.props;
+    const userId = user.attributes.sub;
+
+    this.createProductListener = API.graphql(
+      graphqlOperation(onCreateProduct, { owner: userId }),
+    ).subscribe({
+      next: productData => {
+        const createdProduct = productData.value.data.onCreateProduct;
+        const prevProducts = this.state.market.products.items.filter(
+          item => item.id !== createdProduct.id,
+        );
+        const updatedProducts = [createdProduct, ...prevProducts];
+        const market = { ...this.state.market };
+        market.products.items = updatedProducts;
+        this.setState({ market });
+      },
+    });
+  };
 
   handleGetMarket = async () => {
     const input = {
@@ -79,7 +108,12 @@ class MarketPage extends React.Component {
           <h2 className="mb-mr">{market.name}</h2>- {market.owner}
         </span>
         <div className="items-center pt-2">
-          <span style={{ color: "var(--lightSquidInk)", paddingBottom: "1em" }}>
+          <span
+            style={{
+              color: "var(--lightSquidInk)",
+              paddingBottom: "1em",
+            }}
+          >
             <Icon name="date" className="icon" />
             {market.createdAt}
           </span>
