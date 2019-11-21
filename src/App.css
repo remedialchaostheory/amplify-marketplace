@@ -61,6 +61,10 @@ body {
   margin-left: 1em;
 }
 
+.mr-1 {
+  margin-right: 0.5em;
+}
+
 .mb-1 {
   margin-bottom: 7px;
 }
@@ -213,6 +217,12 @@ body {
   font-size: 30px !important;
 }
 
+.markets-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
 @media (min-width: 640px) {
   .market-title {
     font-size: 3rem;
@@ -290,4 +300,9 @@ body {
   .hide-xs {
     display: none;
   }
+}
+
+.light-grey {
+  /* background-color: rgb(206, 206, 206) !important; */
+  background-color: rgb(197, 197, 197) !important;
 }
