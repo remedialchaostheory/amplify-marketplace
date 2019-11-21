@@ -24,7 +24,7 @@ class NewMarket extends React.Component {
   handleAddMarket = async user => {
     try {
       console.log(this.state.name);
-      console.log("user ->", user);
+      // console.log("user ->", user);
       this.setState({ addMarketDialog: false });
       const input = {
         name: this.state.name,
@@ -57,7 +57,7 @@ class NewMarket extends React.Component {
           <React.Fragment>
             <div className="market-header">
               <h1 className="market-title">
-                Create your own Marketplace
+                Welcome to Marketplace
                 <Button
                   type="text"
                   icon="edit"
