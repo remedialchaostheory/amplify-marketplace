@@ -309,22 +309,3 @@ body {
 .bg-light-grey {
   background-color: rgb(197, 197, 197) !important;
 }
-
-.bg-purple {
-  background-color: var(--purple) !important;
-}
-
-.white {
-  color: #fff !important;
-}
-
-.el-menu--horizontal .el-menu-item:hover,
-.el-menu--horizontal .el-submenu__title:hover {
-  background-color: var(--light-purple) !important;
-}
-
-.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover,
-.el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover,
-.el-menu-item:hover {
-  background-color: var(--light-purple) !important;
-}

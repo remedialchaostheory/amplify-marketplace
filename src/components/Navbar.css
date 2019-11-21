@@ -1,0 +1,28 @@
+.el-menu.el-menu--horizontal {
+  background-color: #f4f8fb;
+}
+
+.app-user,
+.nav-link {
+  color: #000;
+}
+
+.el-menu--horizontal .el-menu-item a {
+  color: #000;
+}
+
+.el-menu--horizontal .nav-container .el-menu-item {
+  border-bottom: none;
+}
+
+.el-menu--horizontal .nav-container .el-menu-item:hover,
+.el-menu--horizontal .nav-container .el-submenu__title:hover {
+  background-color: #f4f8fb;
+  border-bottom: 2px solid purple;
+}
+
+.el-menu--horizontal .nav-container .el-menu-item.sign-out:hover,
+.el-menu--horizontal .nav-container .el-submenu__title.sign-out:hover {
+  background-color: #f4f8fb;
+  border-bottom: none;
+}

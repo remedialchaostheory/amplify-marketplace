@@ -1,9 +1,10 @@
 import React from "react";
 import { Menu as Nav, Icon, Button } from "element-react";
 import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = ({ user, handleSignOut }) => (
-  <Nav mode="horizontal" className="bg-purple" defaultActive="1">
+  <Nav mode="horizontal" defaultActive="1">
     <div className="nav-container">
       {/* Title */}
       <Nav.Item index="1">
@@ -22,15 +23,15 @@ const Navbar = ({ user, handleSignOut }) => (
       {/* Navbar Items */}
       <div className="nav-items">
         <Nav.Item index="2">
-          <span className="app-user white">Hi, {user.attributes.email}</span>
+          <span className="app-user">Hi, {user.attributes.email}</span>
         </Nav.Item>
         <Nav.Item index="3">
-          <NavLink to="/profile" className="nav-link white">
+          <NavLink to="/profile" className="nav-link">
             <Icon name="setting" />
             Profile
           </NavLink>
         </Nav.Item>
-        <Nav.Item index="4">
+        <Nav.Item index="4" className="sign-out">
           <Button type="warning" onClick={handleSignOut}>
             Sign Out
           </Button>
