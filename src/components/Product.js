@@ -27,6 +27,7 @@ class Product extends React.Component {
         shipped,
         price: convertDollarsToCents(price),
       };
+      console.log("input in product ->", { input });
       const resp = await API.graphql(
         graphqlOperation(updateProduct, { input }),
       );
@@ -75,7 +76,7 @@ class Product extends React.Component {
       <UserContext.Consumer>
         {({ user }) => {
           const isProductOwner = user && user.attributes.sub === product.owner;
-          console.log("user ->", user);
+          // console.log("user ->", user);
           return (
             <div className="card-container">
               <Card bodyStyle={{ padding: 0, minWidth: "200px" }}>
