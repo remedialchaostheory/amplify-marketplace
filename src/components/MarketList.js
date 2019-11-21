@@ -83,7 +83,11 @@ const MarketList = ({ searchResults }) => {
                     <div>
                       {market.tags &&
                         market.tags.map(tag => (
-                          <Tag key={tag} className="mr-1 light-grey">
+                          <Tag
+                            key={tag}
+                            className="mr-1"
+                            style={{ backgroundColor: "#c5c5c5" }}
+                          >
                             {tag}
                           </Tag>
                         ))}
