@@ -54,9 +54,13 @@ class MarketPage extends React.Component {
   createSubscriptions = () => {
     const { user } = this.props;
     const userId = user.attributes.sub;
+    const input = {
+      owner: userId,
+    };
+    console.log("{ input} ->", { input });
 
     this.createProductListener = API.graphql(
-      graphqlOperation(onCreateProduct, { owner: userId }),
+      graphqlOperation(onCreateProduct, input),
     ).subscribe({
       next: productData => {
         const createdProduct = productData.value.data.onCreateProduct;
@@ -71,7 +75,7 @@ class MarketPage extends React.Component {
     });
 
     this.updateProductListener = API.graphql(
-      graphqlOperation(onUpdateProduct, { owner: userId }),
+      graphqlOperation(onUpdateProduct, input),
     ).subscribe({
       next: productData => {
         const updatedProduct = productData.value.data.onUpdateProduct;
@@ -90,7 +94,7 @@ class MarketPage extends React.Component {
     });
 
     this.deleteProductListener = API.graphql(
-      graphqlOperation(onDeleteProduct, { owner: userId }),
+      graphqlOperation(onDeleteProduct, input),
     ).subscribe({
       next: productData => {
         const deletedProduct = productData.value.data.onDeleteProduct;
