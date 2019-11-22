@@ -4,6 +4,7 @@ import { createMarket } from "../graphql/mutations";
 // prettier-ignore
 import { Form, Button, Dialog, Input, Select, Notification, } from "element-react";
 import { UserContext } from "../App";
+import "./NewMarket.css";
 
 class NewMarket extends React.Component {
   state = {
@@ -56,37 +57,44 @@ class NewMarket extends React.Component {
         {({ user }) => (
           <React.Fragment>
             <div className="market-header">
-              <h1 className="market-title">
-                Welcome to Marketplace
-                <Button
-                  type="text"
-                  icon="edit"
-                  className="market-title-button"
-                  onClick={() => this.setState({ addMarketDialog: true })}
-                />
-              </h1>
+              <h1 className="market-title">Welcome to Marketplace</h1>
 
-              <Form inline={true} onSubmit={this.props.handleSearch}>
-                <Form.Item>
-                  <Input
-                    placeholder="Search Markets..."
-                    value={this.props.searchTerm}
-                    icon="circle-cross"
-                    onIconClick={this.props.handleClearSearch}
-                    onChange={this.props.handleSearchChange}
-                  />
-                </Form.Item>
-                <Form.Item>
+              <div className="NewMarket-search-container">
+                <Form
+                  inline={true}
+                  onSubmit={this.props.handleSearch}
+                  className="NewMarket-search-form"
+                >
+                  <Form.Item>
+                    <Input
+                      placeholder="Search Markets..."
+                      value={this.props.searchTerm}
+                      className="search-field"
+                      icon="circle-cross"
+                      onIconClick={this.props.handleClearSearch}
+                      onChange={this.props.handleSearchChange}
+                    />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button
+                      type="info"
+                      icon="search"
+                      className="search-icon"
+                      onClick={this.props.handleSearch}
+                      loading={this.props.isSearching}
+                    />
+                  </Form.Item>
+                </Form>
+                <span className="add-market-button">
+                  New
                   <Button
-                    type="info"
-                    icon="search"
-                    onClick={this.props.handleSearch}
-                    loading={this.props.isSearching}
-                  >
-                    Search
-                  </Button>
-                </Form.Item>
-              </Form>
+                    type="text"
+                    icon="plus"
+                    className="add-market-button"
+                    onClick={() => this.setState({ addMarketDialog: true })}
+                  />
+                </span>
+              </div>
             </div>
 
             <Dialog

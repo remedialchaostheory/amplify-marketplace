@@ -1,0 +1,69 @@
+.market-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.market-title {
+  font-weight: 300;
+  border-radius: 10px;
+  border-bottom: 3px solid purple;
+  font-size: 2.5rem;
+  display: flex;
+  color: var(--lightSquidInk);
+  align-items: center;
+}
+
+.add-market-button {
+  /* margin-top: 0em; */
+  vertical-align: top;
+  padding-top: 0;
+  padding-left: 0.5em;
+  color: #f90 !important;
+  font-size: 18px !important;
+}
+.NewMarket-search-container {
+  display: inline-grid;
+  /* grid-template-columns: repeat(3, minmax(200px, 1fr)); */
+  grid-template-columns: 1fr 600px 1fr;
+  width: 100%;
+  align-items: center;
+}
+
+.el-form {
+  display: flex;
+  grid-column: 2;
+}
+
+.el-form-item {
+  margin: 0;
+  margin-bottom: 0;
+}
+
+.el-form--inline .el-form-item {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.NewMarket-search-container .NewMarket-search-form {
+  display: inline-grid;
+  /* grid-template-columns: repeat(3, 1fr); */
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+
+.NewMarket-search-form .el-form-item:nth-child(1) {
+  grid-column: 2;
+}
+
+.NewMarket-search-container .add-market-button {
+  grid-column: 3;
+  justify-self: end;
+  padding: 0;
+}
+
+.NewMarket-search-container .add-market-button .el-icon-plus {
+  padding-top: 1px;
+  padding-left: 5px;
+}
