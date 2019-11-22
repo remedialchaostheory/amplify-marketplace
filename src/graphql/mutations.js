@@ -174,8 +174,8 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   }
 }
 `;
-export const creatOrderl = `mutation CreatOrderl($input: CreateOrderInput!) {
-  creatOrderl(input: $input) {
+export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
+  createOrder(input: $input) {
     id
     product {
       id
