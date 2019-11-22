@@ -186,9 +186,11 @@ body {
 }
 
 .header {
-  color: var(--color-purple);
+  color: purple;
   font-size: 1.2rem;
   padding: 5px 10px;
+  margin-top: 30px;
+  margin-bottom: 5px;
   font-weight: 600;
   text-transform: uppercase;
   display: flex;

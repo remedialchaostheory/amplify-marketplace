@@ -37,14 +37,7 @@ const MarketList = ({ searchResults }) => {
                 {searchResults.length} Results
               </h2>
             ) : (
-              <h2 className="header">
-                <img
-                  src="https://icon.now.sh/store_mall_directory/527FFF"
-                  alt="Store Icon"
-                  className="large-icon"
-                />
-                Markets
-              </h2>
+              <h2 className="header">Markets</h2>
             )}
             <div className="markets-container">
               {markets.map(market => (
