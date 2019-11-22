@@ -18,18 +18,42 @@
 
 .add-market-button {
   /* margin-top: 0em; */
-  vertical-align: top;
+  /* vertical-align: top; */
   padding-top: 0;
   padding-left: 0.5em;
   color: #f90 !important;
   font-size: 18px !important;
 }
 .NewMarket-search-container {
-  display: inline-grid;
+  display: grid;
   /* grid-template-columns: repeat(3, minmax(200px, 1fr)); */
-  grid-template-columns: 1fr 600px 1fr;
+  grid-template-columns: 1fr auto 1fr;
   width: 100%;
   align-items: center;
+}
+/* 
+@media (max-width: 580px) {
+  .NewMarket-search-container {
+    display: grid;
+    width: 100%;
+    align-items: center;
+  }
+}
+ */
+
+@media (max-width: 500px) {
+  .NewMarket-search-container {
+    /* grid-template-columns: 1fr minmax(600px, 1fr) 1fr; */
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-items: center;
+  }
+  .NewMarket-search-container .add-market-button {
+    grid-column: 2 !important;
+    grid-row: 2;
+    justify-self: center !important;
+    padding-top: 10px !important;
+  }
 }
 
 .el-form {
@@ -48,9 +72,8 @@
 }
 
 .NewMarket-search-container .NewMarket-search-form {
-  display: inline-grid;
-  /* grid-template-columns: repeat(3, 1fr); */
-  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  /* display: inline-grid; */
+  /* grid-template-columns: 1fr minmax(100px, 1fr) minmax(50px, 1fr); */
 }
 
 .NewMarket-search-form .el-form-item:nth-child(1) {

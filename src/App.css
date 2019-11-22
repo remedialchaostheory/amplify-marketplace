@@ -195,39 +195,20 @@ body {
   align-items: center;
 }
 
-.market-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.market-title {
-  font-weight: 300;
-  border-radius: 10px;
-  border-bottom: 3px solid purple;
-  font-size: 2.5rem;
-  display: flex;
-  color: var(--lightSquidInk);
-  align-items: center;
-}
-
-.market-title-button {
-  padding-left: 0.5em !important;
-  color: #f90 !important;
-  font-size: 30px !important;
-}
-
 .markets-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
+@media (max-width: 580px) {
+  .markets-container {
+    gap: 10px !important;
+  }
+}
 
 @media (min-width: 640px) {
   .market-title {
-    font-size: 3rem;
+    /* font-size: 3rem; */
   }
 }
 
@@ -235,17 +216,20 @@ body {
   .market-title {
     font-size: 2.1rem;
   }
-  .market-title-button {
-    font-size: 25px !important;
+  .add-market-button {
+    font-size: 20px !important;
   }
 }
 
 @media (max-width: 500px) {
   .market-title {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
-  .market-title-button {
-    font-size: 25px !important;
+  .add-market-button {
+    font-size: 20px !important;
+  }
+  .my-2 {
+    margin: 0.2em 0 !important;
   }
 }
 
@@ -253,7 +237,7 @@ body {
   .market-title {
     font-size: 1.6rem;
   }
-  .market-title-button {
+  .add-market-button {
     font-size: 20px !important;
   }
 }
@@ -262,7 +246,7 @@ body {
   .market-title {
     font-size: 1.5rem;
   }
-  .market-title-button {
+  .add-market-button {
     font-size: 15px !important;
   }
 }
