@@ -28,7 +28,6 @@ const Navbar = ({ user, handleSignOut }) => (
         <Nav.Item index="3">
           <NavLink to="/profile" className="nav-link">
             <Icon name="setting" />
-            Profile
           </NavLink>
         </Nav.Item>
         <Nav.Item index="4" className="sign-out">
