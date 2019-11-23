@@ -142,8 +142,8 @@ export const deleteProduct = `mutation DeleteProduct($input: DeleteProductInput!
   }
 }
 `;
-export const registeruser = `mutation Registeruser($input: CreateUserInput!) {
-  registeruser(input: $input) {
+export const registerUser = `mutation RegisterUser($input: CreateUserInput!) {
+  registerUser(input: $input) {
     id
     username
     email
