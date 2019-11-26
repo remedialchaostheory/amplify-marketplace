@@ -36,6 +36,8 @@ const getUser = `query GetUser($id: ID!) {
 }
 `;
 
+// TODO : make responsive for smaller screens
+
 class ProfilePage extends React.Component {
   state = {
     email: this.props.userAttributes && this.props.userAttributes.email,
