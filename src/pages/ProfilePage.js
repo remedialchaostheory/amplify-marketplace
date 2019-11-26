@@ -258,23 +258,27 @@ class ProfilePage extends React.Component {
                 <div className="mb-1" key={order.id}>
                   <Card>
                     <pre>
-                      <p>Order Id: {order.id}</p>
-                      <p>Product Description: {order.product.description}</p>
-                      <p>
-                        Price: ${convertCentsToDollars(order.product.price)}
+                      <p>Order Id:</p>
+                      <p className="ml-2">{order.id}</p>
+                      <p>Product Description:</p>
+                      <p className="ml-2">{order.product.description}</p>
+                      <p>Price:</p>
+                      <p className="ml-2">
+                        ${convertCentsToDollars(order.product.price)}
                       </p>
-                      <p>Purchased on {formatOrderDate(order.createdAt)}</p>
+                      <p>Purchase Date:</p>
+                      <p className="ml-2">{formatOrderDate(order.createdAt)}</p>
                       {order.shippingAddress && (
                         <>
                           Shipping Address
                           <div className="ml-2">
                             <p>{order.shippingAddress.address_line1}</p>
                             <p>
-                              {order.shippingAddress.city},
-                              {order.shippingAddress.address_state}
-                              {order.shippingAddress.country}
+                              {order.shippingAddress.city},{" "}
+                              {order.shippingAddress.address_state}{" "}
                               {order.shippingAddress.address_zip}
                             </p>
+                            <p>{order.shippingAddress.country}</p>
                           </div>
                         </>
                       )}
