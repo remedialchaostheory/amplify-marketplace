@@ -3,6 +3,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 // prettier-ignore
 import { Table, Button, Notification, MessageBox, Message, Tabs, Icon, Form, Dialog, Input, Card, Tag } from 'element-react'
 import { convertCentsToDollars, formatOrderDate } from "../utils";
+import "./ProfilePage.css";
 
 const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
@@ -257,32 +258,30 @@ class ProfilePage extends React.Component {
               {orders.map(order => (
                 <div className="mb-1" key={order.id}>
                   <Card>
-                    <pre>
-                      <p>Order Id:</p>
-                      <p className="ml-2">{order.id}</p>
-                      <p>Product Description:</p>
-                      <p className="ml-2">{order.product.description}</p>
-                      <p>Price:</p>
-                      <p className="ml-2">
-                        ${convertCentsToDollars(order.product.price)}
-                      </p>
-                      <p>Purchase Date:</p>
-                      <p className="ml-2">{formatOrderDate(order.createdAt)}</p>
-                      {order.shippingAddress && (
-                        <>
-                          Shipping Address
-                          <div className="ml-2">
-                            <p>{order.shippingAddress.address_line1}</p>
-                            <p>
-                              {order.shippingAddress.city},{" "}
-                              {order.shippingAddress.address_state}{" "}
-                              {order.shippingAddress.address_zip}
-                            </p>
-                            <p>{order.shippingAddress.country}</p>
-                          </div>
-                        </>
-                      )}
-                    </pre>
+                    <p>Order ID:</p>
+                    <p className="ml-2">{order.id}</p>
+                    <p>Product Description:</p>
+                    <p className="ml-2">{order.product.description}</p>
+                    <p>Price:</p>
+                    <p className="ml-2">
+                      ${convertCentsToDollars(order.product.price)}
+                    </p>
+                    <p>Purchase Date:</p>
+                    <p className="ml-2">{formatOrderDate(order.createdAt)}</p>
+                    {order.shippingAddress && (
+                      <>
+                        Shipping Address:
+                        <div className="ml-2">
+                          <p>{order.shippingAddress.address_line1}</p>
+                          <p>
+                            {order.shippingAddress.city},{" "}
+                            {order.shippingAddress.address_state}{" "}
+                            {order.shippingAddress.address_zip}
+                          </p>
+                          <p>{order.shippingAddress.country}</p>
+                        </div>
+                      </>
+                    )}
                   </Card>
                 </div>
               ))}
