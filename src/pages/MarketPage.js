@@ -7,6 +7,7 @@ import { Loading, Tabs, Icon } from "element-react";
 import { Link } from "react-router-dom";
 import NewProduct from "../components/NewProduct";
 import Product from "../components/Product";
+import { formatProductDate } from "../utils";
 
 const getMarket = `query GetMarket($id: ID!) {
   getMarket(id: $id) {
@@ -161,7 +162,7 @@ class MarketPage extends React.Component {
             }}
           >
             <Icon name="date" className="icon" />
-            {market.createdAt}
+            {formatProductDate(market.createdAt)}
           </span>
         </div>
 
