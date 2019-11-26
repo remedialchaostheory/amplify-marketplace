@@ -1,6 +1,6 @@
 {
-  "name": "react-amplify-project-three",
-  "version": "0.1.0",
+  "name": "Marketplace",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "aws-amplify": "1.1.11",
@@ -31,7 +31,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.6.0",
     "eslint-plugin-import": "^2.18.2",
