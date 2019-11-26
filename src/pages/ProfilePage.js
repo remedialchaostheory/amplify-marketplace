@@ -10,7 +10,7 @@ const getUser = `query GetUser($id: ID!) {
     username
     email
     registered
-    orders(sortDirection: ASC, limit: 999) {
+    orders(sortDirection: DESC, limit: 999) {
       items {
         id
         createdAt
