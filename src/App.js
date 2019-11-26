@@ -18,6 +18,7 @@ export const UserContext = React.createContext();
 class App extends React.Component {
   state = {
     user: null,
+    userAttributes: null,
   };
 
   componentDidMount() {
@@ -27,7 +28,18 @@ class App extends React.Component {
 
   getUserData = async () => {
     const user = await Auth.currentAuthenticatedUser();
-    user ? this.setState({ user }) : this.setState({ user: null });
+    user
+      ? this.setState({ user }, () => {
+          return this.getUserCurrAttributes(this.state.user);
+        })
+      : this.setState({ user: null });
+  };
+
+  getUserCurrAttributes = async authUserData => {
+    const attributesArr = await Auth.userAttributes(authUserData);
+
+    const attributesObj = Auth.attributesToObject(attributesArr);
+    this.setState({ userAttributes: attributesObj });
   };
 
   onHubCapsule = capsule => {
@@ -81,12 +93,12 @@ class App extends React.Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, userAttributes } = this.state;
 
     return !user ? (
       <Authenticator theme={theme} />
     ) : (
-      <UserContext.Provider value={{ user }}>
+      <UserContext.Provider value={{ user, userAttributes }}>
         <Router history={history}>
           <React.Fragment>
             {/* Navbar */}
@@ -97,7 +109,9 @@ class App extends React.Component {
               <Route exact path="/" component={HomePage} />
               <Route
                 path="/profile"
-                component={() => <ProfilePage user={user} />}
+                component={() => (
+                  <ProfilePage user={user} userAttributes={userAttributes} />
+                )}
               />
               <Route
                 path="/markets/:marketId"

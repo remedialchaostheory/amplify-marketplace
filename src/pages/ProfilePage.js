@@ -46,7 +46,7 @@ class ProfilePage extends React.Component {
         width: "150",
         render: row => {
           if (row.name === "Email") {
-            const emailVerified = this.props.user.attributes.email_verified;
+            const emailVerified = this.props.userAttributes.email_verified;
             return emailVerified ? (
               <Tag type="success">Verfied</Tag>
             ) : (
@@ -71,7 +71,6 @@ class ProfilePage extends React.Component {
                   Delete
                 </Button>
               );
-
             default:
               return;
           }
@@ -81,13 +80,13 @@ class ProfilePage extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.user) {
+    if (this.props.userAttributes) {
       console.log("props user ->", this.props.user);
       console.log(
-        "this.props.user.attributes.sub ->",
-        this.props.user.attributes.sub,
+        "this.props.userAttributes.sub ->",
+        this.props.userAttributes.sub,
       );
-      this.getUserOrders(this.props.user.attributes.sub);
+      this.getUserOrders(this.props.userAttributes.sub);
     }
   }
 
@@ -100,8 +99,9 @@ class ProfilePage extends React.Component {
   };
 
   render() {
-    const { orders } = this.state;
-    return (
+    const { orders, columns } = this.state;
+    const { user, userAttributes } = this.props;
+    return userAttributes && (
       <>
         <Tabs activeName="1" className="profile-tabs">
           <Tabs.Pane
@@ -114,6 +114,35 @@ class ProfilePage extends React.Component {
             name="1"
           >
             <h2 className="header">Profile Summary</h2>
+            <Table
+              columns={columns}
+              data={[
+                {
+                  name: "Your Id",
+                  value: userAttributes.sub,
+                },
+                {
+                  name: "Username",
+                  value: user.username,
+                },
+                {
+                  name: "Email",
+                  value: userAttributes.email,
+                },
+                {
+                  name: "Phone Number",
+                  value: userAttributes.phone_number,
+                },
+                {
+                  name: "Delete Profile",
+                  value: "Sorry to see you go",
+                },
+              ]}
+              showHeader={false}
+              rowClassName={row =>
+                row.name === "Delete Profile" && "delete-profile"
+              }
+            />
           </Tabs.Pane>
 
           <Tabs.Pane
