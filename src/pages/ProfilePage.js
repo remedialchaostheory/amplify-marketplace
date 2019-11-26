@@ -37,6 +37,8 @@ const getUser = `query GetUser($id: ID!) {
 
 class ProfilePage extends React.Component {
   state = {
+    email: this.props.userAttributes && this.props.userAttributes.email,
+    emailDialog: false,
     orders: [],
     columns: [
       { prop: "name", width: "150" },
@@ -61,7 +63,11 @@ class ProfilePage extends React.Component {
           switch (row.name) {
             case "Email":
               return (
-                <Button type="info" size="small">
+                <Button
+                  onClick={() => this.setState({ emailDialog: true })}
+                  type="info"
+                  size="small"
+                >
                   Edit
                 </Button>
               );
@@ -98,93 +104,128 @@ class ProfilePage extends React.Component {
     this.setState({ orders: resp.data.getUser.orders.items });
   };
 
+  handleUpdateEmail = params => {
+    console.log("{state email} ->", { email: this.state.email });
+  };
+
   render() {
-    const { orders, columns } = this.state;
+    const { orders, columns, emailDialog, email } = this.state;
     const { user, userAttributes } = this.props;
-    return userAttributes && (
-      <>
-        <Tabs activeName="1" className="profile-tabs">
-          <Tabs.Pane
-            label={
-              <>
-                <Icon name="document" className="icon" />
-                Summary
-              </>
-            }
-            name="1"
-          >
-            <h2 className="header">Profile Summary</h2>
-            <Table
-              columns={columns}
-              data={[
-                {
-                  name: "Your Id",
-                  value: userAttributes.sub,
-                },
-                {
-                  name: "Username",
-                  value: user.username,
-                },
-                {
-                  name: "Email",
-                  value: userAttributes.email,
-                },
-                {
-                  name: "Phone Number",
-                  value: userAttributes.phone_number,
-                },
-                {
-                  name: "Delete Profile",
-                  value: "Sorry to see you go",
-                },
-              ]}
-              showHeader={false}
-              rowClassName={row =>
-                row.name === "Delete Profile" && "delete-profile"
+    return (
+      userAttributes && (
+        <>
+          <Tabs activeName="1" className="profile-tabs">
+            <Tabs.Pane
+              label={
+                <>
+                  <Icon name="document" className="icon" />
+                  Summary
+                </>
               }
-            />
-          </Tabs.Pane>
+              name="1"
+            >
+              <h2 className="header">Profile Summary</h2>
+              <Table
+                columns={columns}
+                data={[
+                  {
+                    name: "Your Id",
+                    value: userAttributes.sub,
+                  },
+                  {
+                    name: "Username",
+                    value: user.username,
+                  },
+                  {
+                    name: "Email",
+                    value: userAttributes.email,
+                  },
+                  {
+                    name: "Phone Number",
+                    value: userAttributes.phone_number,
+                  },
+                  {
+                    name: "Delete Profile",
+                    value: "Sorry to see you go",
+                  },
+                ]}
+                showHeader={false}
+                rowClassName={row =>
+                  row.name === "Delete Profile" && "delete-profile"
+                }
+              />
+            </Tabs.Pane>
 
-          <Tabs.Pane
-            label={
-              <>
-                <Icon name="message" className="icon" />
-                Orders
-              </>
-            }
-            name="2"
+            <Tabs.Pane
+              label={
+                <>
+                  <Icon name="message" className="icon" />
+                  Orders
+                </>
+              }
+              name="2"
+            >
+              <h2 className="header">Order History</h2>
+
+              {orders.map(order => (
+                <div className="mb-1" key={order.id}>
+                  <Card>
+                    <pre>
+                      <p>Order Id: {order.id}</p>
+                      <p>Product Description: {order.product.description}</p>
+                      <p>
+                        Price: ${convertCentsToDollars(order.product.price)}
+                      </p>
+                      <p>Purchased on {order.createdAt}</p>
+                      {order.shippingAddress && (
+                        <>
+                          Shipping Address
+                          <div className="ml-2">
+                            <p>{order.shippingAddress.address_line1}</p>
+                            <p>
+                              {order.shippingAddress.city},
+                              {order.shippingAddress.address_state}
+                              {order.shippingAddress.country}
+                              {order.shippingAddress.address_zip}
+                            </p>
+                          </div>
+                        </>
+                      )}
+                    </pre>
+                  </Card>
+                </div>
+              ))}
+            </Tabs.Pane>
+          </Tabs>
+          {/* Email Dialog */}
+          <Dialog
+            size="large"
+            customClass="dialog"
+            title="Edit Email"
+            visible={emailDialog}
+            onCancel={() => this.setState({ emailDialog: false })}
           >
-            <h2 className="header">Order History</h2>
-
-            {orders.map(order => (
-              <div className="mb-1" key={order.id}>
-                <Card>
-                  <pre>
-                    <p>Order Id: {order.id}</p>
-                    <p>Product Description: {order.product.description}</p>
-                    <p>Price: ${convertCentsToDollars(order.product.price)}</p>
-                    <p>Purchased on {order.createdAt}</p>
-                    {order.shippingAddress && (
-                      <>
-                        Shipping Address
-                        <div className="ml-2">
-                          <p>{order.shippingAddress.address_line1}</p>
-                          <p>
-                            {order.shippingAddress.city},
-                            {order.shippingAddress.address_state}
-                            {order.shippingAddress.country}
-                            {order.shippingAddress.address_zip}
-                          </p>
-                        </div>
-                      </>
-                    )}
-                  </pre>
-                </Card>
-              </div>
-            ))}
-          </Tabs.Pane>
-        </Tabs>
-      </>
+            <Dialog.Body>
+              <Form labelPosition="top">
+                <Form.Item label="Email">
+                  <Input
+                    value={email}
+                    onChange={email => this.setState({ email })}
+                  />
+                </Form.Item>
+              </Form>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Button onClick={() => this.setState({ emailDialog: false })}>
+                Cancel
+              </Button>
+              <Button type="primary" onClick={this.handleUpdateEmail}>
+                Save
+              </Button>
+            </Dialog.Footer>
+          </Dialog>
+        </>
+      )
     );
   }
 }
