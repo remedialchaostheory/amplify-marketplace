@@ -210,7 +210,7 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
       city
       country
       address_line1
-      address_country
+      address_state
       address_zip
     }
     createdAt
