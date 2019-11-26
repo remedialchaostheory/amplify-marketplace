@@ -38,6 +38,46 @@ const getUser = `query GetUser($id: ID!) {
 class ProfilePage extends React.Component {
   state = {
     orders: [],
+    columns: [
+      { prop: "name", width: "150" },
+      { prop: "value", width: "330" },
+      {
+        prop: "tag",
+        width: "150",
+        render: row => {
+          if (row.name === "Email") {
+            const emailVerified = this.props.user.attributes.email_verified;
+            return emailVerified ? (
+              <Tag type="success">Verfied</Tag>
+            ) : (
+              <Tag type="danger">Unverfied</Tag>
+            );
+          }
+        },
+      },
+      {
+        prop: "operations",
+        render: row => {
+          switch (row.name) {
+            case "Email":
+              return (
+                <Button type="info" size="small">
+                  Edit
+                </Button>
+              );
+            case "Delete Profile":
+              return (
+                <Button type="danger" size="small">
+                  Delete
+                </Button>
+              );
+
+            default:
+              return;
+          }
+        },
+      },
+    ],
   };
 
   componentDidMount() {
