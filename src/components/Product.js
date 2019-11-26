@@ -6,6 +6,7 @@ import { Notification, Popover, Button, Dialog, Card, Form, Input, Radio } from 
 import { updateProduct, deleteProduct } from "../graphql/mutations";
 import { convertCentsToDollars, convertDollarsToCents } from "../utils/index";
 import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 import PayButton from "./PayButton";
 
 class Product extends React.Component {
@@ -77,7 +78,8 @@ class Product extends React.Component {
         {({ userAttributes }) => {
           const isProductOwner =
             userAttributes && userAttributes.sub === product.owner;
-          // console.log("user ->", user);
+          const isEmailVerified =
+            userAttributes && userAttributes.email_verified;
           return (
             <div className="card-container">
               <Card bodyStyle={{ padding: 0, minWidth: "200px" }}>
@@ -103,11 +105,17 @@ class Product extends React.Component {
                     <span className="mx-1">
                       ${convertCentsToDollars(product.price)}
                     </span>
-                    {!isProductOwner && (
-                      <PayButton
-                        product={product}
-                        userAttributes={userAttributes}
-                      />
+                    {isEmailVerified ? (
+                      !isProductOwner && (
+                        <PayButton
+                          product={product}
+                          userAttributes={userAttributes}
+                        />
+                      )
+                    ) : (
+                      <Link to="/profile" className="link">
+                        Verify Email
+                      </Link>
                     )}
                   </div>
                 </div>
