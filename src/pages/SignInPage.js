@@ -4,16 +4,18 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 // prettier-ignore
 import { Table, Button, Notification, MessageBox, Message, Tabs, Icon, Form, Dialog, Input, Card, Tag } from 'element-react'
 import { convertCentsToDollars, formatOrderDate } from "../utils";
+import { history } from "../App";
 
 class SignInPage extends React.Component {
   state = {};
 
   render() {
     return (
-      <div>
-        Sign in here
-        <Authenticator />
-      </div>
+      <Authenticator
+        onStateChange={authState => {
+          authState === "signedIn" && history.push("/");
+        }}
+      />
     );
   }
 }
