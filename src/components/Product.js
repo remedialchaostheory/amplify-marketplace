@@ -82,7 +82,7 @@ class Product extends React.Component {
             userAttributes && userAttributes.email_verified;
           return (
             <div className="card-container">
-              <Card bodyStyle={{ padding: "10px", minWidth: "200px" }}>
+              <Card bodyStyle={{ padding: "15px", minWidth: "200px" }}>
                 <S3Image
                   imgKey={product.file.key}
                   theme={{
@@ -90,8 +90,10 @@ class Product extends React.Component {
                   }}
                 />
                 <div className="card-b">
-                  <h3 className="m-0">{product.description}</h3>
-                  <div className="items-center">
+                  <h3 className="m-0 product-desc-title">
+                    {product.description}
+                  </h3>
+                  <div className="items-center product-desc-delivery">
                     <img
                       src={`https://icon.now.sh/${
                         product.shipped ? "markunread_mailbox" : "mail"
@@ -101,7 +103,7 @@ class Product extends React.Component {
                     />
                     {product.shipped ? "Shipped" : "Emailed"}
                   </div>
-                  <div className="text-right">
+                  <div className="text-right product-desc-price">
                     <span className="mx-1">
                       ${convertCentsToDollars(product.price)}
                     </span>

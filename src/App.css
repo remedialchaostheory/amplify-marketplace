@@ -6,8 +6,9 @@ html,
 body {
   margin: 0;
   background-color: #f4f8fb;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 .app-container {
@@ -289,4 +290,17 @@ body {
   .hide-xs {
     display: none;
   }
+}
+
+.card-b .product-desc-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.card-b .product-desc-delivery {
+  font-size: 14px;
+  font-weight: 300;
+}
+.card-b .product-desc-price {
+  font-size: 16px;
+  font-weight: 500;
 }
