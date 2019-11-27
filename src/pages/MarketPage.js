@@ -44,13 +44,17 @@ class MarketPage extends React.Component {
 
   componentDidMount() {
     this.handleGetMarket();
-    this.createSubscriptions();
+    if (this.props.user) {
+      this.createSubscriptions();
+    }
   }
 
   componentWillUnmount() {
-    this.createProductListener.unsubscribe();
-    this.updateProductListener.unsubscribe();
-    this.deleteProductListener.unsubscribe();
+    if (this.props.user) {
+      this.createProductListener.unsubscribe();
+      this.updateProductListener.unsubscribe();
+      this.deleteProductListener.unsubscribe();
+    }
   }
 
   createSubscriptions = () => {

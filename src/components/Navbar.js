@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu as Nav, Icon, Button } from "element-react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ user, handleSignOut }) => (
@@ -23,7 +24,15 @@ const Navbar = ({ user, handleSignOut }) => (
       {/* Navbar Items */}
       <div className="nav-items">
         <Nav.Item index="2">
-          <span className="app-user">Hi, {user.attributes.email}</span>
+          {user ? (
+            <span className="app-user">Hi, {user.attributes.email}</span>
+          ) : (
+            <span className="app-user">
+              <Link to="/signin" className="link">
+                Sign-in
+              </Link>
+            </span>
+          )}
         </Nav.Item>
         <Nav.Item index="3">
           <NavLink to="/profile" className="nav-link">

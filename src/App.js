@@ -6,6 +6,7 @@ import { Authenticator, AmplifyTheme } from "aws-amplify-react";
 import { Router, Route } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import HomePage from "./pages/HomePage";
+import SignInPage from "./pages/SignInPage";
 import ProfilePage from "./pages/ProfilePage";
 import MarketPage from "./pages/MarketPage";
 import Navbar from "./components/Navbar";
@@ -23,6 +24,9 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getUserData();
+    Auth.currentCredentials()
+      .then(d => console.log("data: ", d))
+      .catch(e => console.log("error: ", e));
     Hub.listen("auth", this, "onHubCapsule");
   }
 
@@ -95,12 +99,10 @@ class App extends React.Component {
   render() {
     const { user, userAttributes } = this.state;
 
-    return !user ? (
-      <Authenticator theme={theme} />
-    ) : (
+    return (
       <UserContext.Provider value={{ user, userAttributes }}>
         <Router history={history}>
-          <React.Fragment>
+          <>
             {/* Navbar */}
             <Navbar user={user} handleSignOut={this.handleSignOut} />
 
@@ -123,8 +125,9 @@ class App extends React.Component {
                   />
                 )}
               />
+              <Route path="/signin" component={() => <SignInPage />} />
             </div>
-          </React.Fragment>
+          </>
         </Router>
       </UserContext.Provider>
     );
