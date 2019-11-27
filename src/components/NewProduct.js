@@ -27,7 +27,7 @@ class NewProduct extends React.Component {
       const { identityId } = await Auth.currentCredentials();
       const filename = `/${visibility}/${identityId}/${Date.now()}-${
         this.state.image.name
-      }}`;
+      }`;
       const uploadedFile = await Storage.put(filename, this.state.image.file, {
         contentType: this.state.image.type,
         progressCallback: progress => {
@@ -49,6 +49,7 @@ class NewProduct extends React.Component {
         shipped: this.state.shipped,
         price: convertDollarsToCents(this.state.price),
         file,
+        owner: this.props.userId,
       };
       const resp = await API.graphql(
         graphqlOperation(createProduct, { input }),
