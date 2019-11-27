@@ -31,6 +31,7 @@ const PayButton = ({ product, userAttributes }) => {
   });
 
   const handleCharge = async token => {
+    // TODO : fix bug where charge will fail if address_state is not supplied (e.g. some countries outside of USA)
     try {
       const ownerEmail = await getOwnerEmail(product.owner);
       console.log("ownerEmail ->", ownerEmail);
