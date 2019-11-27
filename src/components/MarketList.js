@@ -57,7 +57,6 @@ const MarketList = ({ searchResults, searchComplete }) => {
         console.log("data ->", data);
         if (errors.length > 0) return <Error errors={errors} />;
         if (loading || !data.listMarkets) return <Loading fullscreen={true} />;
-        // TODO : fix bug - if search returns 0 results, should display "0 results" instead of all markets
         const markets = searchComplete ? searchResults : data.listMarkets.items;
         console.log("markets ->", markets);
         return (
