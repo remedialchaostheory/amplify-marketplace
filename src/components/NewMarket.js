@@ -86,13 +86,14 @@ class NewMarket extends React.Component {
                   </Form.Item>
                 </Form>
                 <span className="add-market-button">
-                  New
                   <Button
                     type="text"
                     icon="plus"
                     className="add-market-button"
                     onClick={() => this.setState({ addMarketDialog: true })}
-                  />
+                  >
+                    New
+                  </Button>
                 </span>
               </div>
             </div>
