@@ -78,6 +78,10 @@ body {
   margin: 0 5px 5px 0;
 }
 
+.mx-center {
+  margin: 0 auto;
+}
+
 .items-center {
   display: flex;
   align-items: center;
@@ -307,4 +311,13 @@ body {
 
 .el-icon-plus {
   float: right;
+}
+
+.MarketPage-heading .MarketPage-heading-title {
+  margin: 5px auto;
+}
+.MarketPage-heading .MarketPage-heading-owner {
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 5px;
 }
