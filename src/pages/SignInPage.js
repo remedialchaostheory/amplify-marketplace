@@ -13,6 +13,7 @@ class SignInPage extends React.Component {
     return (
       <Authenticator
         onStateChange={authState => {
+          // TODO : save previous page and redirect back to it on sign in
           authState === "signedIn" && history.push("/");
         }}
       />
