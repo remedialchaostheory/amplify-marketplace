@@ -9,13 +9,22 @@ import { history } from "../App";
 class SignInPage extends React.Component {
   state = {};
 
+  handleSignIn = authState => {
+    // TODO : save previous page and redirect back to it on sign in
+    if (authState === "signedIn") {
+      Notification({
+        title: "Success",
+        message: "Sign in successful",
+        type: "success",
+      });
+      history.push("/");
+    }
+  };
+
   render() {
     return (
       <Authenticator
-        onStateChange={authState => {
-          // TODO : save previous page and redirect back to it on sign in
-          authState === "signedIn" && history.push("/");
-        }}
+        onStateChange={authState => this.handleSignIn(authState)}
       />
     );
   }
