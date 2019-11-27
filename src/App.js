@@ -2,7 +2,7 @@ import React from "react";
 import { API, graphqlOperation, Auth, Hub } from "aws-amplify";
 import { getUser } from "./graphql/queries";
 import { registerUser } from "./graphql/mutations";
-import { Authenticator, AmplifyTheme } from "aws-amplify-react";
+// import { Authenticator, AmplifyTheme } from "aws-amplify-react";
 import { Router, Route } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import HomePage from "./pages/HomePage";
@@ -24,19 +24,20 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getUserData();
-    Auth.currentCredentials()
-      .then(d => console.log("data: ", d))
-      .catch(e => console.log("error: ", e));
     Hub.listen("auth", this, "onHubCapsule");
   }
 
   getUserData = async () => {
-    const user = await Auth.currentAuthenticatedUser();
-    user
-      ? this.setState({ user }, () => {
-          return this.getUserCurrAttributes(this.state.user);
-        })
-      : this.setState({ user: null });
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      user
+        ? this.setState({ user }, () => {
+            return this.getUserCurrAttributes(this.state.user);
+          })
+        : this.setState({ user: null });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   getUserCurrAttributes = async authUserData => {
@@ -126,7 +127,8 @@ class App extends React.Component {
                   />
                 )}
               />
-              <Route path="/signin" component={() => <SignInPage />} />
+              {/* <Route path="/signin" component={() => <SignInPage />} /> */}
+              <Route path="/signin" component={SignInPage} />
             </div>
           </>
         </Router>
