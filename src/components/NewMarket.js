@@ -51,11 +51,24 @@ class NewMarket extends React.Component {
       .filter(tag => tag.label.toLowerCase().includes(query.toLowerCase()));
     this.setState({ options });
   };
+
+  handleNewMarketButton = user => {
+    if (user) {
+      this.setState({ addMarketDialog: true });
+    } else {
+      Notification({
+        title: "Sign in",
+        message: "Please sign in before adding a new market",
+        type: "info",
+      });
+    }
+  };
+
   render() {
     return (
       <UserContext.Consumer>
         {({ user }) => (
-          <React.Fragment>
+          <>
             <div className="market-header">
               <h1 className="market-title">Welcome to Marketplace</h1>
 
@@ -90,7 +103,7 @@ class NewMarket extends React.Component {
                     type="text"
                     icon="plus"
                     className="add-market-button"
-                    onClick={() => this.setState({ addMarketDialog: true })}
+                    onClick={() => this.handleNewMarketButton(user)}
                   >
                     New
                   </Button>
@@ -150,7 +163,7 @@ class NewMarket extends React.Component {
                 </Button>
               </Dialog.Footer>
             </Dialog>
-          </React.Fragment>
+          </>
         )}
       </UserContext.Consumer>
     );
