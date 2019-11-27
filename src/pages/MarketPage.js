@@ -45,6 +45,7 @@ class MarketPage extends React.Component {
   componentDidMount() {
     this.handleGetMarket();
     if (this.props.user) {
+      console.log("creating subscriptions");
       this.createSubscriptions();
     }
   }
@@ -145,6 +146,7 @@ class MarketPage extends React.Component {
 
   render() {
     const { market, isLoading, isMarketOwner, isEmailVerified } = this.state;
+    const { userAttributes } = this.props;
 
     return isLoading ? (
       <Loading fullscreen={true} />
@@ -183,7 +185,10 @@ class MarketPage extends React.Component {
               name="1"
             >
               {isEmailVerified ? (
-                <NewProduct marketId={this.props.marketId} />
+                <NewProduct
+                  marketId={this.props.marketId}
+                  userId={userAttributes.sub}
+                />
               ) : (
                 <Link to="/profile" className="header">
                   Verify Your Email Before Adding Products
