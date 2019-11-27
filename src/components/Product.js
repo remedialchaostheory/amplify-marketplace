@@ -82,7 +82,7 @@ class Product extends React.Component {
             userAttributes && userAttributes.email_verified;
           return (
             <div className="card-container">
-              <Card bodyStyle={{ padding: 0, minWidth: "200px" }}>
+              <Card bodyStyle={{ padding: "10px", minWidth: "200px" }}>
                 <S3Image
                   imgKey={product.file.key}
                   theme={{
