@@ -37,7 +37,7 @@ const listMarkets = `query ListMarkets(
 }
 `;
 
-const MarketList = ({ searchResults }) => {
+const MarketList = ({ searchResults, searchComplete }) => {
   const onNewMarket = (prevQuery, newData) => {
     let updatedQuery = { ...prevQuery };
     const updatedMarketList = [
@@ -54,18 +54,20 @@ const MarketList = ({ searchResults }) => {
       onSubscriptionMsg={onNewMarket}
     >
       {({ data, loading, errors }) => {
+        console.log("data ->", data);
         if (errors.length > 0) return <Error errors={errors} />;
         if (loading || !data.listMarkets) return <Loading fullscreen={true} />;
         // TODO : fix bug - if search returns 0 results, should display "0 results" instead of all markets
-        const markets =
-          searchResults.length > 0 ? searchResults : data.listMarkets.items;
+        const markets = searchComplete ? searchResults : data.listMarkets.items;
         console.log("markets ->", markets);
         return (
           <>
-            {searchResults.length > 0 ? (
+            {searchComplete ? (
               <h2 className="text-green">
                 <Icon type="success" name="check" className="icon" />
-                {searchResults.length} Results
+                {searchResults.length === 1
+                  ? "1 Result"
+                  : `${searchResults.length} Results`}
               </h2>
             ) : (
               <h2 className="header">Markets</h2>

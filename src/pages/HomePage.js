@@ -9,12 +9,13 @@ class HomePage extends React.Component {
     searchTerm: "",
     searchResults: [],
     isSearching: false,
+    searchComplete: false, // handles whether to show 0 results or all markets
   };
 
   handleSearchChange = searchTerm => this.setState({ searchTerm });
 
   handleClearSearch = () =>
-    this.setState({ searchTerm: "", searchResults: [] });
+    this.setState({ searchTerm: "", searchResults: [], searchComplete: false });
 
   handleSearch = async event => {
     try {
@@ -39,6 +40,7 @@ class HomePage extends React.Component {
       this.setState({
         searchResults: resp.data.searchMarkets.items,
         isSearching: false,
+        searchComplete: true,
       });
     } catch (err) {
       console.error(err);
@@ -54,7 +56,10 @@ class HomePage extends React.Component {
           handleClearSearch={this.handleClearSearch}
           handleSearch={this.handleSearch}
         />
-        <MarketList searchResults={this.state.searchResults} />
+        <MarketList
+          searchResults={this.state.searchResults}
+          searchComplete={this.state.searchComplete}
+        />
       </>
     );
   }
