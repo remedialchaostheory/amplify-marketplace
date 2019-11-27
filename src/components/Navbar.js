@@ -24,15 +24,9 @@ const Navbar = ({ user, handleSignOut }) => (
       {/* Navbar Items */}
       <div className="nav-items">
         <Nav.Item index="2">
-          {user ? (
-            <span className="app-user">Hi, {user.attributes.email}</span>
-          ) : (
-            <span className="app-user">
-              <Link to="/signin" className="link">
-                Sign-in
-              </Link>
-            </span>
-          )}
+          <span className="app-user">
+            Hi, {user ? user.attributes.email : "guest"}
+          </span>
         </Nav.Item>
         <Nav.Item index="3">
           <NavLink to="/profile" className="nav-link">
@@ -40,9 +34,17 @@ const Navbar = ({ user, handleSignOut }) => (
           </NavLink>
         </Nav.Item>
         <Nav.Item index="4" className="sign-out">
-          <Button type="warning" onClick={handleSignOut}>
-            Sign Out
-          </Button>
+          {user ? (
+            <Button type="warning" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          ) : (
+            <Button type="warning">
+              <NavLink to="/signin" className="nav-link">
+                Sign In
+              </NavLink>
+            </Button>
+          )}
         </Nav.Item>
       </div>
     </div>
