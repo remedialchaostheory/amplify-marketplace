@@ -219,7 +219,7 @@ class ProfilePage extends React.Component {
                 columns={columns}
                 data={[
                   {
-                    name: "Your Id",
+                    name: "ID",
                     value: userAttributes.sub,
                   },
                   {
@@ -236,7 +236,7 @@ class ProfilePage extends React.Component {
                   },
                   {
                     name: "Delete Profile",
-                    value: "Sorry to see you go",
+                    value: "Nooo, don't go!",
                   },
                 ]}
                 showHeader={false}
