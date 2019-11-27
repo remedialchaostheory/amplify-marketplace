@@ -158,8 +158,11 @@ class MarketPage extends React.Component {
         </Link>
         {/* Market Metadata */}
         <span className="items-center pt-2">
-          <h2 className="mb-mr">{market.name}</h2>- {market.owner}
+          <h2 className="mb-mr">{market.name}</h2>
         </span>
+        <p className="m-0" style={{ fontWeight: "300" }}>
+          by {market.owner}
+        </p>
         <div className="items-center pt-2">
           <span
             style={{
