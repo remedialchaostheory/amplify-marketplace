@@ -91,6 +91,7 @@ class App extends React.Component {
   handleSignOut = async () => {
     try {
       await Auth.signOut();
+      window.location.reload();
     } catch (err) {
       console.error("Error signing out", err);
     }
