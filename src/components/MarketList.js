@@ -56,6 +56,7 @@ const MarketList = ({ searchResults }) => {
       {({ data, loading, errors }) => {
         if (errors.length > 0) return <Error errors={errors} />;
         if (loading || !data.listMarkets) return <Loading fullscreen={true} />;
+        // TODO : fix bug - if search returns 0 results, should display "0 results" instead of all markets
         const markets =
           searchResults.length > 0 ? searchResults : data.listMarkets.items;
         console.log("markets ->", markets);
@@ -87,12 +88,14 @@ const MarketList = ({ searchResults }) => {
                           {market.name}
                         </Link>
                         <span style={{ color: "var(--darkAmazonOrange)" }}>
-                          ({market.products.items.length})
+                          {market.products.items
+                            ? market.products.items.length
+                            : 0}
                         </span>
                       </span>
                       <div
                         style={{
-                          color: "var(--lightSquidInk",
+                          color: "var(--lightSquidInk)",
                           fontSize: "12px",
                         }}
                       >
