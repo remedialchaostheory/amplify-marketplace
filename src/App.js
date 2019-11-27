@@ -36,7 +36,7 @@ class App extends React.Component {
           })
         : this.setState({ user: null });
     } catch (err) {
-      console.error(err);
+      console.warn(err);
     }
   };
 
