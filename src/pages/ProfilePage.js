@@ -201,144 +201,144 @@ class ProfilePage extends React.Component {
       verificationCode,
     } = this.state;
     const { user, userAttributes } = this.props;
-    return (
-      userAttributes && (
-        <>
-          <Tabs activeName="1" className="profile-tabs">
-            <Tabs.Pane
-              label={
-                <>
-                  <Icon name="document" className="icon" />
-                  Summary
-                </>
-              }
-              name="1"
-            >
-              <h2 className="header">Profile Summary</h2>
-              <Table
-                columns={columns}
-                data={[
-                  {
-                    name: "ID",
-                    value: userAttributes.sub,
-                  },
-                  {
-                    name: "Username",
-                    value: user.username,
-                  },
-                  {
-                    name: "Email",
-                    value: userAttributes.email,
-                  },
-                  {
-                    name: "Phone Number",
-                    value: userAttributes.phone_number,
-                  },
-                  {
-                    name: "Delete Profile",
-                    value: "Nooo, don't go!",
-                  },
-                ]}
-                showHeader={false}
-                rowClassName={row =>
-                  row.name === "Delete Profile" && "delete-profile"
-                }
-              />
-            </Tabs.Pane>
-
-            <Tabs.Pane
-              label={
-                <>
-                  <Icon name="message" className="icon" />
-                  Orders
-                </>
-              }
-              name="2"
-            >
-              <h2 className="header">Order History</h2>
-
-              {orders.map(order => (
-                <div className="mb-1" key={order.id}>
-                  <Card>
-                    <p>Order ID:</p>
-                    <p className="ml-2">{order.id}</p>
-                    <p>Product Description:</p>
-                    <p className="ml-2">{order.product.description}</p>
-                    <p>Price:</p>
-                    <p className="ml-2">
-                      ${convertCentsToDollars(order.product.price)}
-                    </p>
-                    <p>Purchase Date:</p>
-                    <p className="ml-2">{formatOrderDate(order.createdAt)}</p>
-                    {order.shippingAddress && (
-                      <>
-                        Shipping Address:
-                        <div className="ml-2">
-                          <p>{order.shippingAddress.address_line1}</p>
-                          <p>
-                            {order.shippingAddress.city},{" "}
-                            {order.shippingAddress.address_state}{" "}
-                            {order.shippingAddress.address_zip}
-                          </p>
-                          <p>{order.shippingAddress.country}</p>
-                        </div>
-                      </>
-                    )}
-                  </Card>
-                </div>
-              ))}
-            </Tabs.Pane>
-          </Tabs>
-
-          {/* Email Dialog */}
-          <Dialog
-            size="large"
-            customClass="dialog"
-            title="Edit Email"
-            visible={emailDialog}
-            onCancel={() => this.setState({ emailDialog: false })}
+    return !userAttributes ? (
+      <div className="flex-center">Sign in to view your profile</div>
+    ) : (
+      <>
+        <Tabs activeName="1" className="profile-tabs">
+          <Tabs.Pane
+            label={
+              <>
+                <Icon name="document" className="icon" />
+                Summary
+              </>
+            }
+            name="1"
           >
-            <Dialog.Body>
-              <Form labelPosition="top">
-                <Form.Item label="Email">
-                  <Input
-                    value={email}
-                    onChange={email => this.setState({ email })}
-                  />
-                </Form.Item>
-                {verificationForm && (
-                  <Form.Item label="Enter Verification Code" labelWidth="120">
-                    <Input
-                      onChange={verificationCode =>
-                        this.setState({ verificationCode })
-                      }
-                      value={verificationCode}
-                    ></Input>
-                  </Form.Item>
-                )}
-              </Form>
-            </Dialog.Body>
-            <Dialog.Footer>
-              <Button onClick={() => this.setState({ emailDialog: false })}>
-                Cancel
-              </Button>
-              {!verificationForm && (
-                <Button type="primary" onClick={this.handleUpdateEmail}>
-                  Save
-                </Button>
-              )}
+            <h2 className="header">Profile Summary</h2>
+            <Table
+              columns={columns}
+              data={[
+                {
+                  name: "ID",
+                  value: userAttributes.sub,
+                },
+                {
+                  name: "Username",
+                  value: user.username,
+                },
+                {
+                  name: "Email",
+                  value: userAttributes.email,
+                },
+                {
+                  name: "Phone Number",
+                  value: userAttributes.phone_number,
+                },
+                {
+                  name: "Delete Profile",
+                  value: "Nooo, don't go!",
+                },
+              ]}
+              showHeader={false}
+              rowClassName={row =>
+                row.name === "Delete Profile" && "delete-profile"
+              }
+            />
+          </Tabs.Pane>
+
+          <Tabs.Pane
+            label={
+              <>
+                <Icon name="message" className="icon" />
+                Orders
+              </>
+            }
+            name="2"
+          >
+            <h2 className="header">Order History</h2>
+
+            {orders.map(order => (
+              <div className="mb-1" key={order.id}>
+                <Card>
+                  <p>Order ID:</p>
+                  <p className="ml-2">{order.id}</p>
+                  <p>Product Description:</p>
+                  <p className="ml-2">{order.product.description}</p>
+                  <p>Price:</p>
+                  <p className="ml-2">
+                    ${convertCentsToDollars(order.product.price)}
+                  </p>
+                  <p>Purchase Date:</p>
+                  <p className="ml-2">{formatOrderDate(order.createdAt)}</p>
+                  {order.shippingAddress && (
+                    <>
+                      Shipping Address:
+                      <div className="ml-2">
+                        <p>{order.shippingAddress.address_line1}</p>
+                        <p>
+                          {order.shippingAddress.city},{" "}
+                          {order.shippingAddress.address_state}{" "}
+                          {order.shippingAddress.address_zip}
+                        </p>
+                        <p>{order.shippingAddress.country}</p>
+                      </div>
+                    </>
+                  )}
+                </Card>
+              </div>
+            ))}
+          </Tabs.Pane>
+        </Tabs>
+
+        {/* Email Dialog */}
+        <Dialog
+          size="large"
+          customClass="dialog"
+          title="Edit Email"
+          visible={emailDialog}
+          onCancel={() => this.setState({ emailDialog: false })}
+        >
+          <Dialog.Body>
+            <Form labelPosition="top">
+              <Form.Item label="Email">
+                <Input
+                  value={email}
+                  onChange={email => this.setState({ email })}
+                />
+              </Form.Item>
               {verificationForm && (
-                <Button
-                  type="primary"
-                  onClick={() => this.handleVerifyEmail("email")}
-                >
-                  Submit
-                </Button>
+                <Form.Item label="Enter Verification Code" labelWidth="120">
+                  <Input
+                    onChange={verificationCode =>
+                      this.setState({ verificationCode })
+                    }
+                    value={verificationCode}
+                  ></Input>
+                </Form.Item>
               )}
-            </Dialog.Footer>
-          </Dialog>
-        </>
-      )
+            </Form>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button onClick={() => this.setState({ emailDialog: false })}>
+              Cancel
+            </Button>
+            {!verificationForm && (
+              <Button type="primary" onClick={this.handleUpdateEmail}>
+                Save
+              </Button>
+            )}
+            {verificationForm && (
+              <Button
+                type="primary"
+                onClick={() => this.handleVerifyEmail("email")}
+              >
+                Submit
+              </Button>
+            )}
+          </Dialog.Footer>
+        </Dialog>
+      </>
     );
   }
 }
