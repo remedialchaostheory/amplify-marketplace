@@ -92,7 +92,9 @@ class App extends React.Component {
   handleSignOut = async () => {
     try {
       await Auth.signOut();
-      window.location.reload();
+      // * Go back to homepage. Necessary for static website when subscriptions are canceled and marketpage won't exist
+      const originUrl = window.location.origin;
+      window.location.replace(originUrl);
     } catch (err) {
       console.error("Error signing out", err);
     }
