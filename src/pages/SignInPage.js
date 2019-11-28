@@ -1,9 +1,6 @@
 import React from "react";
-import { Authenticator, AmplifyTheme } from "aws-amplify-react";
-import { Auth, API, graphqlOperation } from "aws-amplify";
-// prettier-ignore
-import { Table, Button, Notification, MessageBox, Message, Tabs, Icon, Form, Dialog, Input, Card, Tag } from 'element-react'
-import { convertCentsToDollars, formatOrderDate } from "../utils";
+import { Authenticator } from "aws-amplify-react";
+import { Notification } from "element-react";
 import { history } from "../App";
 
 class SignInPage extends React.Component {
