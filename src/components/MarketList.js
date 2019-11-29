@@ -91,7 +91,8 @@ const MarketList = ({ searchResults, searchComplete }) => {
                         <span style={{ color: "var(--darkAmazonOrange)" }}>
                           {market.products.items
                             ? market.products.items.length
-                            : 0}
+                            : 0}{" "}
+                          items
                         </span>
                       </span>
                       <div
