@@ -296,6 +296,9 @@ body {
   }
 }
 
+.card-b {
+  margin-top: 12px;
+}
 .card-b .product-desc-title {
   font-size: 16px;
   font-weight: 600;
@@ -320,4 +323,8 @@ body {
   text-align: center;
   margin-top: 3px;
   margin-bottom: 5px;
+}
+
+.jc-sb {
+  justify-content: space-between;
 }
