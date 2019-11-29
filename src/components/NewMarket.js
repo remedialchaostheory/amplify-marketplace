@@ -7,6 +7,7 @@ import { UserContext } from "../App";
 import "./NewMarket.css";
 
 class NewMarket extends React.Component {
+  // TODO: add custom tags which will add to a table for later querying the current list
   state = {
     name: "",
     tags: [
