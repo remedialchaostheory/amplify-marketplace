@@ -100,7 +100,7 @@ class NewProduct extends React.Component {
                 onChange={price => this.setState({ price })}
               />
             </Form.Item>
-            <Form.Item label="Is the Product or Emailed to the Customer?">
+            <Form.Item label="Is the Product Shipped or Emailed to the Customer?">
               <div className="text-center">
                 <Radio
                   value="true"
