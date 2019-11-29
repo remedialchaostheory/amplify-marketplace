@@ -73,18 +73,17 @@ const MarketList = ({ searchResults, searchComplete }) => {
             )}
             <div className="markets-container">
               {markets.map(market => (
-                <div key={market.id} className="my-2">
+                <div key={market.id} className="my-2 ">
                   <Card
                     bodyStyle={{
                       display: "grid",
                       padding: "1em",
                       alignItems: "center",
-                      justifyContent: "space-between",
                       rowGap: "2rem",
                     }}
                   >
-                    <div>
-                      <span className="flex">
+                    <div className="MarketList-card">
+                      <span className="flex jc-sb">
                         <Link className="link" to={`/markets/${market.id}`}>
                           {market.name}
                         </Link>
