@@ -11,6 +11,7 @@ const stripeConfig = {
   publishableAPIKey: "pk_test_Sh2VtPNSbsjWAzzu6PAOpg3H00untteNHo",
 };
 
+// TODO: Add dialog ? to indicate that nothing will be sent to user
 const PayButton = ({ product, userAttributes }) => {
   const getOwnerEmail = async ownerId => {
     try {
