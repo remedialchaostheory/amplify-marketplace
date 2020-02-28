@@ -16,4 +16,5 @@ Highly scalable. Multi-factor authentication. Stripe API for credit card process
 <ins>Built with</ins><br>
 React.js<br>
 GraphQL<br>
+ElasticSearch<br>
 AWS Amplify / AppSync / Cognito / DynamoDB / Lambda / s3
