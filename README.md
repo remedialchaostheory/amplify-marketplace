@@ -10,7 +10,8 @@ To play around with creating market and products, you can use `test@example.com`
 
 E-commerce app where users can create their own markets and sell items.
 
-Highly scalable. Multi-factor authentication. Stripe API for credit card processing.
+Highly scalable. Multi-factor authentication. Stripe API for credit card processing.<br>
+Auto-suggest tags based on image recogntion via Clarifai API (in progess)
 <br>
 <br>
 <ins>Built with</ins><br>
